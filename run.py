@@ -21,7 +21,7 @@ def ssh_multiple_connections(hosts_info, command):
             hostnames.append(hostname)
             ssh.close()
         except Exception as e:
-            print(f"Error occured in：{username}，Connect {hostname} : {str(e)}")
+            print(f"Error occured in: {username}，Connect {hostname} : {str(e)}")
     return users, hostnames
 
 ssh_info_str = os.getenv('SSH_INFO', '[]')
@@ -30,13 +30,13 @@ hosts_info = json.loads(ssh_info_str)
 command = 'whoami'
 user_list, hostname_list = ssh_multiple_connections(hosts_info, command)
 user_num = len(user_list)
-content = "SSH Server login info：\n"
+content = "SSH Server login info: \n"
 for user, hostname in zip(user_list, hostname_list):
-    content += f"Username：{user}，Server：{hostname}\n"
+    content += f"Username: {user}，Server: {hostname}\n"
 beijing_timezone = timezone(timedelta(hours=8))
 time = datetime.now(beijing_timezone).strftime('%Y-%m-%d %H:%M:%S')
 loginip = requests.get('https://api.ipify.org?format=json').json()['ip']
-content += f"Login happened this time: {user_num} servers\nLogin time: {time}\nLogin IP：{loginip}"
+content += f"Login happened this time: {user_num} servers\nLogin time: {time}\nLogin IP: {loginip}"
 
 push = os.getenv('PUSH')
 
