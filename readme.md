@@ -1,78 +1,59 @@
+# Description
 
-# 说明 
+Due to the requirements of the serv00 server, if the user account is not correctly logged in through DevilWEB or SSH panel within 90 days, the account will be automatically deleted from the system and the data collected by the account cannot be recovered.
 
-因serv00服务器要求，如果用户帐户在 90 天内未通过 DevilWEB 或 SSH 面板正确登录，则该帐户将自动从系统中删除，并且无法恢复该帐户收集的数据。
+This repository will be used to automatically log in to the SSH connection of serv00 at a scheduled time to execute instructions and push notifications, which can achieve the role of regular login to keep the account
 
-本仓库将用于定时自动化登录serv00的SSH连接执行指令并推送通知，可以实现定期登录保号的作用
+### Preparation
 
-tg交流群：[https://t.me/zzzjsjl](https://t.me/zzzjsjl)
+- A GitHub account.
+- Fork this repository
+- Prepare a serv00 account
+- Get the Chat ID of your Telegram user or group.
 
-**希望大家点个Star🌟🌟🌟支持下**
+- Set the following Secrets in your GitHub repository:
 
-### 准备工作
+### Configure Secrets
 
-- 一个GitHub账号。
-- Fork本仓库
-- 准备好serv00账号
-- 获取您的 Telegram 用户或群组的 Chat ID。
+- Go to your own repository page after forking this repository > "Settings" > "Secrets" and add the following Secrets:
 
-- 在您的 GitHub 仓库中设置以下 Secrets：
+- `SSH_INFO`: A JSON string containing SSH connection information. The following is an example
 
+```json
+[
+{"hostname": "Server number", "username": "User name", "password": "Password"},
+{"hostname": "s5.serv00.com", "username": "user", "password": "password"},
+{"hostname": "s6.serv00.com", "username": "user6", "password": "password6"}
+]
+```
+- ~PUSHPLUS_TOKEN: token applied by pushplus~
+- **The new version has removed pushplus push, please do not add PUSHPLUS_TOKEN variable**
+- **The new version has removed pushplus push, please do not add PUSHPLUS_TOKEN variable**
+- **The new version has removed pushplus push, please do not add PUSHPLUS_TOKEN variable**
+- TELEGRAM_BOT_TOKEN: Your Telegram Bot API Token. Example: `733255939:AAHsoQf-3lOoc1xC8le2d58qlfrCqEXzu74`
+- TELEGRAM_CHAT_ID: Your Telegram Chat ID (can be your private chat or group). Example: `5329499650`
+- PUSH: Push channel value is `mail` or `telegram`. Example: `mail`
+- MAIL: Email address to receive notifications. Example: `mail@mail.com`
 
+### Test run
 
-### 配置Secrets
+- Manually trigger a workflow run in the Actions tab of the GitHub repository.
+- "Actions" page>"Run SSH Login">"Run workflow">"Run workflow"
+- Check the running results. If there is no error, it means the running is successful. You can click the list of running records to view the running details
 
-- 进入你fork本仓库后自己的仓库页面>“Settings” > “Secrets”中添加以下Secrets：
+### Scheduled automatic running
 
-- `SSH_INFO`：包含SSH连接信息的JSON字符串。以下是示例
+- This workflow runs at 19:00 Beijing time on the 5th of each month by default
 
-  ```json
-  [
-    {"hostname": "服务器号", "username": "用户名", "password": "密码"},
-    {"hostname": "s5.serv00.com", "username": "user", "password": "password"},
-    {"hostname": "s6.serv00.com", "username": "user6", "password": "password6"}
-  ]
-  ```
-- ~PUSHPLUS_TOKEN：pushplus申请的token~
-- **新版已经将pushplus推送移除，请勿添加PUSHPLUS_TOKEN变量**
-- **新版已经将pushplus推送移除，请勿添加PUSHPLUS_TOKEN变量**
-- **新版已经将pushplus推送移除，请勿添加PUSHPLUS_TOKEN变量**
-- TELEGRAM_BOT_TOKEN：您的 Telegram Bot API Token。示例：`733255939:AAHsoQf-3lOoc1xC8le2d58qlfrCqEXzu74`
-- TELEGRAM_CHAT_ID：您的 Telegram Chat ID（可以是您的私人聊天或群组）。示例：`5329499650`
-- PUSH：推送渠道值为`mail`或者`telegram`。示例：`mail`
-- MAIL：接收通知的邮箱。示例：`mail@mail.com`
+- You can adjust the running time according to your needs
 
+```yaml
+- cron: '0 11 5 * *' # Run at 19:00 Beijing time on the 5th of each month
+```
 
+### Notes
 
+- **Confidentiality**: Secrets are sensitive information, please make sure not to disclose them to public code bases or unauthorized personnel.
+- **Update and delete**: If you need to update or delete Secrets, you can manage them through the Secrets page of the repository.
 
-
-
-### 测试运行
-
-- 在GitHub仓库的“Actions”选项卡中，手动触发运行一次工作流程。
-- “Actions”页面>"Run SSH Login">"Run workflow">"Run workflow"
-- 检查运行结果，没有报错说明就是运行成功了，可以点击运行记录的列表进去查看运行的详细情况
-
-
-
-### 定时自动运行
-
-- 此工作流默认每月的 5号 北京时间 19 点运行
-
-- 可以根据自己的需求调整运行时间
-
-  ```yaml
-  - cron: '0 11 5 * *'  # 每月的 5号 北京时间 19 点运行
-  ```
-
-  
-
-### 注意事项
-
-- **保密性**: Secrets 是敏感信息，请确保不要将它们泄露到公共代码库或未授权的人员。
-- **更新和删除**: 如果需要更新或删除 Secrets，可以通过仓库的 Secrets 页面进行管理。
-
-通过以上步骤，你就可以成功将代码 fork 到你的仓库下并运行它了。如果需要进一步的帮助或有其他问题，请随时告知！
-
-### 赞助
-感谢 [YxVM](https://yxvm.com/) 提供服务器赞助
+With the above steps, you can successfully fork the code to your repository and run it. If you need further help or have other questions, please feel free to let me know!
