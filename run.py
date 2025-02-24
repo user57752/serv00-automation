@@ -32,7 +32,7 @@ user_list, hostname_list = ssh_multiple_connections(hosts_info, command)
 user_num = len(user_list)
 content = "SSH Server login info: \n"
 for user, hostname in zip(user_list, hostname_list):
-    content += f"Username: {user}，Server: {hostname}\n"
+    content += f"Username: {user},\nServer: {hostname}\n"
 beijing_timezone = timezone(timedelta(hours=8))
 time = datetime.now(beijing_timezone).strftime('%Y-%m-%d %H:%M:%S')
 loginip = requests.get('https://api.ipify.org?format=json').json()['ip']
