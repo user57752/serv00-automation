@@ -35,7 +35,7 @@ for user, hostname in zip(user_list, hostname_list):
     content += f"Username：{user}，Server：{hostname}\n"
 beijing_timezone = timezone(timedelta(hours=8))
 time = datetime.now(beijing_timezone).strftime('%Y-%m-%d %H:%M:%S')
-menu = requests.get('https://api.zzzwb.com/v1?get=tg').json()
+menu = 0
 loginip = requests.get('https://api.ipify.org?format=json').json()['ip']
 content += f"Login happened this time： {user_num} \nLogin time：{time}\nLogin IP：{loginip}"
 
